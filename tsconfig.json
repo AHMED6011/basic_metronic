@@ -1,6 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "rtl.config.js"],
   "compilerOptions": {
     "lib": ["es2017"],
     "ignoreDeprecations": "5.0",

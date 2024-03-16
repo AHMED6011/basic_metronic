@@ -163,64 +163,15 @@
     <!--end::Card body-->
   </div>
   <!--end::details View-->
-
-  <!--begin::Row-->
-  <div class="row gy-10 gx-xl-10">
-    <!--begin::Col-->
-    <div class="col-xl-6">
-      <KTChartWidget1
-        widget-classes="card-xxl-stretch mb-5 mb-xl-10"
-      ></KTChartWidget1>
-    </div>
-    <!--end::Col-->
-
-    <!--begin::Col-->
-    <div class="col-xl-6">
-      <KTListWidget1
-        widget-classes="card-xxl-stretch mb-5 mb-xl-10'"
-      ></KTListWidget1>
-    </div>
-    <!--end::Col-->
-  </div>
-  <!--end::Row-->
-
-  <!--begin::Row-->
-  <div class="row gy-10 gx-xl-10">
-    <!--begin::Col-->
-    <div class="col-xl-6">
-      <KTListWidget5
-        widget-classes="card-xxl-stretch mb-5 mb-xl-10"
-      ></KTListWidget5>
-    </div>
-    <!--end::Col-->
-
-    <!--begin::Col-->
-    <div class="col-xl-6">
-      <KTTableWidget5
-        widget-classes="card-xxl-stretch mb-5 mb-xl-10"
-      ></KTTableWidget5>
-    </div>
-    <!--end::Col-->
-  </div>
-  <!--end::Row-->
 </template>
 
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
 import { defineComponent } from "vue";
-import KTChartWidget1 from "@/components/widgets/charts/Widget1.vue";
-import KTListWidget5 from "@/components/widgets/lists/Widget5.vue";
-import KTTableWidget5 from "@/components/widgets/tables/Widget5.vue";
-import KTListWidget1 from "@/components/widgets/lists/Widget1.vue";
 
 export default defineComponent({
   name: "account-overview",
-  components: {
-    KTChartWidget1,
-    KTListWidget5,
-    KTTableWidget5,
-    KTListWidget1,
-  },
+  components: {},
   setup() {
     return {
       getAssetPath,

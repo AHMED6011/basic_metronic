@@ -92,7 +92,6 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
   scrollBehavior(to) {
-    // If the route has a hash, scroll to the section with the specified ID; otherwise, scroll to the top of the page.
     if (to.hash) {
       return {
         el: to.hash,
@@ -120,7 +119,7 @@ router.beforeEach((to, from, next) => {
   configStore.resetLayoutConfig();
 
   // verify auth token before each page change
-  authStore.verifyAuth();
+  // authStore.verifyAuth();
 
   // before page access check if page requires authentication
   if (to.meta.middleware == "auth") {

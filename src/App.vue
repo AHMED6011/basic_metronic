@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, onBeforeMount, onMounted } from "vue";
+import { defineComponent, nextTick, ref, onBeforeMount, onMounted } from "vue";
 import { RouterView } from "vue-router";
 import { useConfigStore } from "@/stores/config";
 import { useThemeStore } from "@/stores/theme";
@@ -20,17 +20,15 @@ export default defineComponent({
     const configStore = useConfigStore();
     const themeStore = useThemeStore();
     const bodyStore = useBodyStore();
+    const lang = ref(localStorage.getItem("lang") || "ar");
 
     onBeforeMount(() => {
-      /**
-       * Overrides the layout config using saved data from localStorage
-       * remove this to use static config (@/layouts/default-layout/config/DefaultLayoutConfig.ts)
-       */
+      if (lang.value === "ar") {
+        import("./assets/rtl/style.rtl.css");
+      } else {
+        import("./assets/sass/style.scss");
+      }
       configStore.overrideLayoutConfig();
-
-      /**
-       *  Sets a mode from configuration
-       */
       themeStore.setThemeMode(themeConfigValue.value);
     });
 
@@ -41,6 +39,10 @@ export default defineComponent({
         bodyStore.removeBodyClassName("page-loading");
       });
     });
+
+    return {
+      lang,
+    };
   },
 });
 </script>
@@ -66,7 +68,6 @@ export default defineComponent({
 @import "assets/keenicons/solid/style.css";
 @import "assets/sass/element-ui.dark";
 @import "assets/sass/plugins";
-@import "assets/sass/style";
 
 #app {
   display: contents;

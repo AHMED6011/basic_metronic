@@ -103,7 +103,6 @@
                 >
                   <i class="bi bi-three-dots fs-3"></i>
                 </button>
-                <Dropdown3></Dropdown3>
               </div>
               <!--end::Menu-->
             </div>
@@ -263,13 +262,10 @@
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
 import { defineComponent } from "vue";
-import Dropdown3 from "@/components/dropdown/Dropdown3.vue";
 
 export default defineComponent({
   name: "kt-account",
-  components: {
-    Dropdown3,
-  },
+  components: {},
   setup() {
     return {
       getAssetPath,

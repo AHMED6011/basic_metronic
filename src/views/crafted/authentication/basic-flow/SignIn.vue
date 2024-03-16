@@ -45,7 +45,7 @@
           tabindex="1"
           class="form-control form-control-lg form-control-solid"
           type="text"
-          name="email"
+          name="UserName"
           autocomplete="off"
         />
         <!--end::Input-->
@@ -62,7 +62,9 @@
         <!--begin::Wrapper-->
         <div class="d-flex flex-stack mb-2">
           <!--begin::Label-->
-          <label class="form-label fw-bold text-gray-900 fs-6 mb-0">Password</label>
+          <label class="form-label fw-bold text-gray-900 fs-6 mb-0">
+            Password
+          </label>
           <!--end::Label-->
 
           <!--begin::Link-->
@@ -238,7 +240,7 @@ export default defineComponent({
       //Deactivate indicator
       submitButton.value?.removeAttribute("data-kt-indicator");
       // eslint-disable-next-line
-        submitButton.value!.disabled = false;
+      submitButton.value!.disabled = false;
     };
 
     return {

@@ -16,7 +16,7 @@
           </div>
         </td>
         <template v-for="(properties, j) in header" :key="j">
-          <td :class="{ 'text-end': j === header.length - 1 }">
+          <td class="text-center">
             <slot :name="`${properties.columnLabel}`" :row="row">
               {{ row }}
             </slot>

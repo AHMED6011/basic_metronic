@@ -15,9 +15,7 @@
       </th>
       <template v-for="(column, i) in header" :key="i">
         <th
-          :class="{
-            'text-end': i === header.length - 1,
-          }"
+          class="text-center"
           @click="onSort(column.columnLabel, column.sortEnabled)"
           :style="{
             minWidth: column.columnWidth ? `${column.columnWidth}px` : '0',

@@ -4,11 +4,17 @@ import ApiService from "@/core/services/ApiService";
 import JwtService from "@/core/services/JwtService";
 
 export interface User {
-  name: string;
-  surname: string;
-  email: string;
-  password: string;
-  api_token: string;
+  userID: string;
+  token: string;
+  expiration: string;
+  userName: string;
+  isStaff: boolean;
+  manageAdmins: boolean;
+  category: string;
+  canClose: boolean;
+  canAccept: boolean;
+  canReject: boolean;
+  canInProgress: boolean;
 }
 
 export const useAuthStore = defineStore("auth", () => {
@@ -20,7 +26,7 @@ export const useAuthStore = defineStore("auth", () => {
     isAuthenticated.value = true;
     user.value = authUser;
     errors.value = {};
-    JwtService.saveToken(user.value.api_token);
+    JwtService.saveToken(user.value.userID, user.value.token);
   }
 
   function setError(error: any) {
@@ -38,6 +44,7 @@ export const useAuthStore = defineStore("auth", () => {
     return ApiService.post("login", credentials)
       .then(({ data }) => {
         setAuth(data);
+        console.log(data);
       })
       .catch(({ response }) => {
         setError(response.data.errors);
@@ -49,7 +56,7 @@ export const useAuthStore = defineStore("auth", () => {
   }
 
   function register(credentials: User) {
-    return ApiService.post("register", credentials)
+    return ApiService.post("SignUp", credentials)
       .then(({ data }) => {
         setAuth(data);
       })
@@ -68,21 +75,23 @@ export const useAuthStore = defineStore("auth", () => {
       });
   }
 
-  function verifyAuth() {
-    if (JwtService.getToken()) {
-      ApiService.setHeader();
-      ApiService.post("verify_token", { api_token: JwtService.getToken() })
-        .then(({ data }) => {
-          setAuth(data);
-        })
-        .catch(({ response }) => {
-          setError(response.data.errors);
-          purgeAuth();
-        });
-    } else {
-      purgeAuth();
-    }
-  }
+  //! This function for verifing the email for the user or admin
+
+  // function verifyAuth() {
+  //   if (JwtService.getToken()) {
+  //     ApiService.setHeader();
+  //     ApiService.post("verify_token", { api_token: JwtService.getToken() })
+  //       .then(({ data }) => {
+  //         setAuth(data);
+  //       })
+  //       .catch(({ response }) => {
+  //         setError(response.data.errors);
+  //         purgeAuth();
+  //       });
+  //   } else {
+  //     purgeAuth();
+  //   }
+  // }
 
   return {
     errors,
@@ -92,6 +101,6 @@ export const useAuthStore = defineStore("auth", () => {
     logout,
     register,
     forgotPassword,
-    verifyAuth,
+    // verifyAuth,
   };
 });
