@@ -13,7 +13,9 @@
         class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px"
         data-kt-menu-trigger="{default:'click', lg: 'hover'}"
         data-kt-menu-attach="parent"
-        data-kt-menu-placement="bottom-start"
+        :data-kt-menu-placement="
+          $i18n.locale === 'ar' ? 'top-end' : 'bottom-start'
+        "
       >
         <KTIcon
           v-if="themeMode === 'light'"
@@ -33,7 +35,9 @@
         class="cursor-pointer symbol symbol-35px"
         data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
         data-kt-menu-attach="parent"
-        data-kt-menu-placement="bottom-start"
+        :data-kt-menu-placement="
+          $i18n.locale === 'ar' ? 'bottom-end' : 'bottom-start'
+        "
       >
         <i class="ki-solid ki-gear fs-2x"></i>
       </div>
@@ -66,6 +70,7 @@ import KTUserMenu from "@/layouts/default-layout/components/menus/UserAccountMen
 import KTThemeModeSwitcher from "@/layouts/default-layout/components/theme-mode/ThemeModeSwitcher.vue";
 import { ThemeModeComponent } from "@/assets/ts/layout";
 import { useThemeStore } from "@/stores/theme";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   name: "header-navbar",
@@ -75,6 +80,8 @@ export default defineComponent({
   },
   setup() {
     const store = useThemeStore();
+
+    const { t } = useI18n();
 
     const themeMode = computed(() => {
       if (store.mode === "system") {
@@ -86,6 +93,7 @@ export default defineComponent({
     return {
       themeMode,
       getAssetPath,
+      t,
     };
   },
 });

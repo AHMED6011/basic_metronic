@@ -8,7 +8,9 @@
     <div
       class="menu-item px-5"
       data-kt-menu-trigger="hover"
-      data-kt-menu-placement="right-start"
+      :data-kt-menu-placement="
+        $i18n.locale === 'ar' ? 'left-start' : 'right-start'
+      "
       data-kt-menu-flip="center, start"
     >
       <router-link to="/" class="menu-link px-5">
@@ -92,7 +94,7 @@
 
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";

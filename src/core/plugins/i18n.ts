@@ -9,6 +9,10 @@ const messages = {
     createdDate: "Date",
     status: "Status",
     projects: "Projects",
+    themeMode: "Theme Mode",
+    themeDesc: "Enjoy Dark & Light modes.",
+    light: "Light",
+    dark: "Dark",
     campaigns: "Campaigns",
     documents: "Documents",
     connections: "Connections",
@@ -78,6 +82,10 @@ const messages = {
     createdDate: "التاريخ",
     status: "الحالة",
     projects: "المشاريع",
+    themeMode: "وضع السمة",
+    themeDesc: ".استمتع بأوضاع الداكن والفاتح",
+    light: "فاتح",
+    dark: "داكن",
     campaigns: "الحملات",
     documents: "المستندات",
     connections: "الاتصالات",
@@ -143,7 +151,7 @@ const messages = {
 
 const i18n = createI18n({
   legacy: false,
-  locale: "en",
+  locale: "ar",
   globalInjection: true,
   messages,
 });

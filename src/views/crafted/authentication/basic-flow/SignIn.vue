@@ -7,7 +7,7 @@
       id="kt_login_signin_form"
       @submit="onSubmitLogin"
       :validation-schema="login"
-      :initial-values="{ email: 'admin@demo.com', password: 'demo' }"
+      :initial-values="{ userName: '', password: '' }"
     >
       <!--begin::Heading-->
       <div class="text-center mb-10">
@@ -44,14 +44,14 @@
         <Field
           tabindex="1"
           class="form-control form-control-lg form-control-solid"
-          type="text"
-          name="UserName"
+          type="email"
+          name="userName"
           autocomplete="off"
         />
         <!--end::Input-->
         <div class="fv-plugins-message-container">
           <div class="fv-help-block">
-            <ErrorMessage name="email" />
+            <ErrorMessage name="userName" />
           </div>
         </div>
       </div>
@@ -168,7 +168,6 @@ import { getAssetPath } from "@/core/helpers/assets";
 import { defineComponent, ref } from "vue";
 import { ErrorMessage, Field, Form as VForm } from "vee-validate";
 import { useAuthStore, type User } from "@/stores/auth";
-import { useRouter } from "vue-router";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as Yup from "yup";
 
@@ -181,13 +180,12 @@ export default defineComponent({
   },
   setup() {
     const store = useAuthStore();
-    const router = useRouter();
 
     const submitButton = ref<HTMLButtonElement | null>(null);
 
     //Create form validation object
     const login = Yup.object().shape({
-      email: Yup.string().email().required().label("Email"),
+      userName: Yup.string().email().required().label("userName"),
       password: Yup.string().min(4).required().label("Password"),
     });
 
@@ -220,7 +218,7 @@ export default defineComponent({
           },
         }).then(() => {
           // Go to page after successfully login
-          router.push({ name: "dashboard" });
+          location.replace("/dashboard");
         });
       } else {
         Swal.fire({

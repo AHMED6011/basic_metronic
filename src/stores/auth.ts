@@ -44,7 +44,6 @@ export const useAuthStore = defineStore("auth", () => {
     return ApiService.post("login", credentials)
       .then(({ data }) => {
         setAuth(data);
-        console.log(data);
       })
       .catch(({ response }) => {
         setError(response.data.errors);

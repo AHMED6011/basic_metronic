@@ -89,8 +89,6 @@ export default defineComponent({
       }
     });
 
-    console.log(t("dashboard"));
-
     const translate = (text: string) => {
       if (te(text)) {
         return t(text);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" direction="rtl">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Metronic Vue Demo" />
@@ -9,6 +9,7 @@
       href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"
     />
     <link rel="stylesheet" href="/splash-screen.css" />
+    <link rel="stylesheet" href="" id="main-css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
       Metronic - The World's #1 Selling Vue & Bootstrap Admin Template by
@@ -29,6 +30,30 @@
         themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches
           ? "dark"
           : "light";
+      }
+
+      const lang = localStorage.getItem("lang");
+
+      const setRtlMode = () => {
+        var link = document.getElementById("main-css");
+        link?.setAttribute("href", "/src/assets/rtl/style.rtl.css");
+        document.documentElement.setAttribute("dir", "rtl");
+        document.documentElement.setAttribute("direction", "rtl");
+        document.documentElement.setAttribute("style", "direction:rtl");
+      };
+
+      const setLtrMode = () => {
+        var link = document.getElementById("main-css");
+        document.documentElement.removeAttribute("dir");
+        document.documentElement.removeAttribute("direction");
+        document.documentElement.removeAttribute("style");
+        link?.setAttribute("href", "/src/assets/sass/style.scss");
+      };
+
+      if (lang === "ar") {
+        setRtlMode();
+      } else {
+        setLtrMode();
       }
 
       document.documentElement.setAttribute("data-bs-theme", themeMode);

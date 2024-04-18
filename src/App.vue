@@ -3,11 +3,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, ref, onBeforeMount, onMounted } from "vue";
+import { defineComponent, nextTick, onBeforeMount, onMounted } from "vue";
 import { RouterView } from "vue-router";
 import { useConfigStore } from "@/stores/config";
 import { useThemeStore } from "@/stores/theme";
-import { useBodyStore } from "@/stores/body";
 import { themeConfigValue } from "@/layouts/default-layout/config/helper";
 import { initializeComponents } from "@/core/plugins/keenthemes";
 
@@ -19,15 +18,8 @@ export default defineComponent({
   setup() {
     const configStore = useConfigStore();
     const themeStore = useThemeStore();
-    const bodyStore = useBodyStore();
-    const lang = ref(localStorage.getItem("lang") || "ar");
 
     onBeforeMount(() => {
-      if (lang.value === "ar") {
-        import("./assets/rtl/style.rtl.css");
-      } else {
-        import("./assets/sass/style.scss");
-      }
       configStore.overrideLayoutConfig();
       themeStore.setThemeMode(themeConfigValue.value);
     });
@@ -35,14 +27,10 @@ export default defineComponent({
     onMounted(() => {
       nextTick(() => {
         initializeComponents();
-
-        bodyStore.removeBodyClassName("page-loading");
       });
     });
 
-    return {
-      lang,
-    };
+    return {};
   },
 });
 </script>
@@ -67,7 +55,8 @@ export default defineComponent({
 @import "assets/keenicons/outline/style.css";
 @import "assets/keenicons/solid/style.css";
 @import "assets/sass/element-ui.dark";
-@import "assets/sass/plugins";
+//@import "assets/sass/plugins";
+//@import "assets/sass/style.scss";
 
 #app {
   display: contents;

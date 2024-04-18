@@ -57,12 +57,12 @@
             class="form-control form-control-lg form-control-solid"
             type="text"
             placeholder=""
-            name="first_name"
+            name="name"
             autocomplete="off"
           />
           <div class="fv-plugins-message-container">
             <div class="fv-help-block">
-              <ErrorMessage name="first_name" />
+              <ErrorMessage name="name" />
             </div>
           </div>
         </div>
@@ -70,17 +70,19 @@
 
         <!--begin::Col-->
         <div class="col-xl-6">
-          <label class="form-label fw-bold text-gray-900 fs-6">Last Name</label>
+          <label class="form-label fw-bold text-gray-900 fs-6"
+            >Phone Number</label
+          >
           <Field
             class="form-control form-control-lg form-control-solid"
             type="text"
             placeholder=""
-            name="last_name"
+            name="PhoneNumber"
             autocomplete="off"
           />
           <div class="fv-plugins-message-container">
             <div class="fv-help-block">
-              <ErrorMessage name="last_name" />
+              <ErrorMessage name="PhoneNumber" />
             </div>
           </div>
         </div>
@@ -101,6 +103,23 @@
         <div class="fv-plugins-message-container">
           <div class="fv-help-block">
             <ErrorMessage name="email" />
+          </div>
+        </div>
+      </div>
+      <!--end::Input group-->
+      <!--begin::Input group-->
+      <div class="fv-row mb-7">
+        <label class="form-label fw-bold text-gray-900 fs-6">TC</label>
+        <Field
+          class="form-control form-control-lg form-control-solid"
+          type="text"
+          placeholder=""
+          name="tc"
+          autocomplete="off"
+        />
+        <div class="fv-plugins-message-container">
+          <div class="fv-help-block">
+            <ErrorMessage name="tc" />
           </div>
         </div>
       </div>
@@ -246,9 +265,10 @@ export default defineComponent({
     const submitButton = ref<HTMLButtonElement | null>(null);
 
     const registration = Yup.object().shape({
-      first_name: Yup.string().required().label("Name"),
-      last_name: Yup.string().required().label("Surname"),
+      name: Yup.string().required().label("Name"),
+      PhoneNumber: Yup.number().required().label("Phone Number"),
       email: Yup.string().min(4).required().email().label("Email"),
+      tc: Yup.number().min(4).required().label("TC"),
       password: Yup.string().required().label("Password"),
       password_confirmation: Yup.string()
         .required()
@@ -279,7 +299,7 @@ export default defineComponent({
 
       const error = Object.values(store.errors);
 
-      if (!error) {
+      if (error.length < 1) {
         Swal.fire({
           text: "You have successfully logged in!",
           icon: "success",
@@ -291,9 +311,9 @@ export default defineComponent({
           },
         }).then(function () {
           // Go to page after successfully login
-          router.push({ name: "dashboard" });
+          location.replace("metronic8/vue/demo1/dashboard");
         });
-      } else {
+      } else if (error.length > 0) {
         Swal.fire({
           text: error[0] as string,
           icon: "error",
